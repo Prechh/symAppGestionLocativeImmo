@@ -2,12 +2,15 @@
 
 namespace App\Controller;
 
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use App\Entity\Property;
+use App\Form\PropertyType;
 use App\Repository\PropertyRepository;
+use Doctrine\ORM\EntityManagerInterface;
 use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class PropertyController extends AbstractController
 {
@@ -22,6 +25,32 @@ class PropertyController extends AbstractController
 
         return $this->render('property/property.html.twig', [
             'propertys' => $propertys
+        ]);
+    }
+
+    #[Route('/property/new', name: 'app_property_new',  methods: ['GET', 'POST'])]
+    public function new(Request $request, EntityManagerInterface $manager): Response
+    {
+        $property = new Property();
+        $form = $this->createForm(PropertyType::class, $property);
+
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $property = $form->getData();
+
+            $manager->persist($property);
+            $manager->flush();
+
+            $this->addFlash(
+                'success',
+                'La propriétée à été ajoutée avec succès !'
+            );
+
+            return $this->redirectToRoute('app_property');
+        }
+
+        return $this->render('property/newProperty.html.twig', [
+            'form' => $form->createView()
         ]);
     }
 }
