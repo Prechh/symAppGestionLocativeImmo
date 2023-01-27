@@ -34,7 +34,7 @@ class AppFixtures extends Fixture
         $manager->flush();
 
 
-        for ($i = 1; $i < 10; $i++) {
+        for ($i = 1; $i < 30; $i++) {
             $property = new Property();
             $property->setTitle($this->faker->word())
                 ->setDescription($this->faker->word())
