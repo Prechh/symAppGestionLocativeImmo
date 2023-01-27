@@ -79,4 +79,19 @@ class PropertyController extends AbstractController
             'form' => $form->createView()
         ]);
     }
+
+    #[Route('/property/delete/{id}', 'app_property_delete',  methods: ['GET'])]
+    public function delete(EntityManagerInterface $manager, Property $property): Response
+    {
+        $manager->remove($property);
+        $manager->flush();
+
+
+        $this->addFlash(
+            'success',
+            'La propriétée à été supprimé avec succès !'
+        );
+
+        return $this->redirectToRoute('app_property');
+    }
 }

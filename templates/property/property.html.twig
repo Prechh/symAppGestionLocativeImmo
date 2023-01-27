@@ -56,6 +56,7 @@
 					<th scope="col">Prix du loyer</th>
 					<th scope="col">Prix du dépot de garantie</th>
 					<th scope="col"></th>
+					<th scope="col"></th>
 				</tr>
 			</thead>
 
@@ -78,6 +79,11 @@
 						<td>
 							<a href="{{ path('app_property_edit', {id: property.id}) }}" class="btn btn-warning">
 								Editer
+							</a>
+						</td>
+						<td>
+							<a href="{{ path('app_property_delete', {id: property.id}) }}" class="btn btn-danger">
+								Supprimer
 							</a>
 						</td>
 
