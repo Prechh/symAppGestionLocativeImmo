@@ -54,8 +54,8 @@
 					<th scope="col">Code postal</th>
 					<th scope="col">Prix des charges</th>
 					<th scope="col">Prix du loyer</th>
-					<th scope="col">Prix du dépot de garantie
-					</th>
+					<th scope="col">Prix du dépot de garantie</th>
+					<th scope="col"></th>
 				</tr>
 			</thead>
 
@@ -75,6 +75,12 @@
 						<td>{{ property.pricecharges }}</td>
 						<td>{{ property.rentprice }}</td>
 						<td>{{ property.securitydepositprice }}</td>
+						<td>
+							<a href="{{ path('app_property_edit', {id: property.id}) }}" class="btn btn-warning">
+								Editer
+							</a>
+						</td>
+
 					</tr>
 				{% endfor %}
 			</tbody>

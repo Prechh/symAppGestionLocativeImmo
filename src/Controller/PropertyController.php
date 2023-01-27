@@ -53,4 +53,30 @@ class PropertyController extends AbstractController
             'form' => $form->createView()
         ]);
     }
+
+
+    #[Route('/property/edit/{id}', 'app_property_edit',  methods: ['GET', 'POST'])]
+    public function edit(Property $property, Request $request, EntityManagerInterface $manager): Response
+    {
+        $form = $this->createForm(PropertyType::class, $property);
+
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $property = $form->getData();
+
+            $manager->persist($property);
+            $manager->flush();
+
+            $this->addFlash(
+                'success',
+                'La propriétée à été modifié avec succès !'
+            );
+
+            return $this->redirectToRoute('app_property');
+        }
+
+        return $this->render('property/editProperty.html.twig', [
+            'form' => $form->createView()
+        ]);
+    }
 }
