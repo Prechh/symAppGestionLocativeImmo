@@ -8,7 +8,7 @@ use Faker\Generator;
 use App\Entity\Property;
 use Doctrine\Persistence\ObjectManager;
 use Doctrine\Bundle\FixturesBundle\Fixture;
-use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
+use App\Entity\Tenant;
 
 class AppFixtures extends Fixture
 {
@@ -21,6 +21,7 @@ class AppFixtures extends Fixture
 
     public function load(ObjectManager $manager): void
     {
+        // User
         for ($i = 1; $i < 10; $i++) {
             $user = new User();
             $user->setEmail($this->faker->email())
@@ -31,10 +32,10 @@ class AppFixtures extends Fixture
             $manager->persist($user);
         }
 
-        $manager->flush();
 
-
-        for ($i = 1; $i < 30; $i++) {
+        // Property
+        $properties = [];
+        for ($j = 1; $j < 30; $j++) {
             $property = new Property();
             $property->setTitle($this->faker->word())
                 ->setDescription($this->faker->word())
@@ -49,7 +50,24 @@ class AppFixtures extends Fixture
                 ->setRentPrice(mt_rand(300, 600))
                 ->setSecurityDepositPrice(mt_rand(300, 600));
 
+            $properties[] = $property;
             $manager->persist($property);
+        }
+
+        // Tenant
+        for ($k = 1; $k < 20; $k++) {
+            $tenant = new Tenant();
+            $tenant->setName($this->faker->lastName())
+                ->setFirstname($this->faker->firstName())
+                ->setMonthlyRate(mt_rand(300, 1000))
+                ->setAccountBalance(mt_rand(1000, 10000));
+
+            for ($l = 0; $l < 1; $l++) {
+                $tenant->addProperty($properties[mt_rand(0, count($properties) - 1)]);
+            }
+
+
+            $manager->persist($tenant);
         }
 
 

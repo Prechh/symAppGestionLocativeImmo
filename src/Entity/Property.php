@@ -6,7 +6,9 @@ use DateTimeImmutable;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use App\Repository\PropertyRepository;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Validator\Constraints as Assert;
+
 
 #[ORM\Entity(repositoryClass: PropertyRepository::class)]
 class Property
@@ -100,6 +102,11 @@ class Property
 
     #[ORM\Column(nullable: true)]
     private ?\DateTimeImmutable $UpdatedAt = null;
+
+
+    #[ORM\ManyToOne(inversedBy: 'property')]
+    private ?Tenant $tenant = null;
+
 
     /**
      * Constructor
@@ -280,6 +287,18 @@ class Property
     public function setUpdatedAt(?\DateTimeImmutable $UpdatedAt): self
     {
         $this->UpdatedAt = $UpdatedAt;
+
+        return $this;
+    }
+
+    public function getTenant(): ?Tenant
+    {
+        return $this->tenant;
+    }
+
+    public function setTenant(?Tenant $tenant): self
+    {
+        $this->tenant = $tenant;
 
         return $this;
     }

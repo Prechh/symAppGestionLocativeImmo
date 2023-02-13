@@ -1,10 +1,8 @@
-{% extends 'base.html.twig' %}
-
+{% extends "base.html.twig" %}
 
 {% block title %}
-	Accueil
+	Ajouter un locataire
 {% endblock %}
-
 
 {% block body %}
 	<nav class="navbar navbar-expand-lg navbar-light bg-success">
@@ -26,7 +24,7 @@
 						</a>
 					</li>
 					<li class="nav-item">
-						<a class="nav-link active" href="{{ path('app_tenant') }}">Locataires
+						<a class="nav-link active" href="#">Locataires
 							<span class="visually-hidden">(current)</span>
 						</a>
 					</li>
@@ -40,22 +38,23 @@
 		</div>
 	</nav>
 
-	<div class="container mt-5">
-		<div class="jumbotron">
-			<h1 class="display-4">Agence Immobilière fictive
-			</h1>
-			<p class="lead">Lorem ipsum dolor sit amet consectetur adipisicing elit. Modi consequatur eaque asperiores nobis illum sunt doloremque beatae, minima a non perspiciatis maiores inventore nisi ratione quas quod qui. Praesentium, recusandae?</p>
+	<div class="container">
+		<h1 class="mt-5">
+			Ajouter un locataire
+		</h1>
+
+		{{ form_start(form) }}
+		<div class="row">
+			<div class="col-md-4">{{ form_row(form.name)}}</div>
+			<div class="col-md-4">{{ form_row(form.firstname)}}</div>
 		</div>
 
-		<a href="{{ path('app_property') }}" class="btn btn-success">
-			Voir les propriétée
-		</a>
-		<a href="{{ path('app_tenant') }}" class="btn btn-success">
-			Voir les locataire
-		</a>
-		<a href="#" class="btn btn-success">
-			Voir les paiements
-		</a>
+		<div class="row">
+			<div class="col-md-4">{{ form_row(form.monthly_rate)}}</div>
+			<div class="col-md-4">{{ form_row(form.account_balance)}}</div>
+		</div>
+
+		{{ form_end(form) }}
 	</div>
 
 {% endblock %}
