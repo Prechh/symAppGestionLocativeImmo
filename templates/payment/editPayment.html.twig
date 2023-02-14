@@ -1,7 +1,7 @@
 {% extends "base.html.twig" %}
 
 {% block title %}
-	Ajouter une propriétée
+	Editer un paiment
 {% endblock %}
 
 {% block body %}
@@ -40,37 +40,16 @@
 
 	<div class="container">
 		<h1 class="mt-5">
-			Ajouter une propriétée
+			Modifier un paiment
 		</h1>
 
 		{{ form_start(form) }}
 		<div class="row">
-			<div class="col-md-4">{{ form_row(form.Title)}}</div>
-			<div class="col-md-8">{{ form_row(form.Description)}}</div>
+			<div class="col-md-4">{{ form_row(form.Invoice)}}</div>
+			<div class="col-md-4">{{ form_row(form.Amount)}}</div>
 		</div>
 
-		<div class="row">
-			<div class="col-md-4">{{ form_row(form.Surface)}}</div>
-			<div class="col-md-4">{{ form_row(form.Rooms)}}</div>
-			<div class="col-md-4">{{ form_row(form.Bedrooms)}}</div>
-		</div>
-
-		<div class="row">
-			<div class="col-md-4">{{ form_row(form.Price_charges)}}</div>
-			<div class="col-md-4">{{ form_row(form.Rent_price)}}</div>
-			<div class="col-md-4">{{ form_row(form.Security_deposit_price)}}</div>
-		</div>
-
-		<div class="row">
-			<div class="col-md-6">{{ form_row(form.Address)}}</div>
-			<div class="col-md-6">{{ form_row(form.Additional_address)}}</div>
-		</div>
-
-		<div class="row">
-			<div class="col-md-6">{{ form_row(form.City)}}</div>
-			<div class="col-md-6">{{ form_row(form.Postal_code)}}</div>
-		</div>
 		{{ form_end(form) }}
 	</div>
-
-{% endblock %}
+	{{ form_end(form) }}
+</div>{% endblock %}

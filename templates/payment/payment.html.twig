@@ -1,7 +1,7 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}
-	Propriétées
+	Paiments
 {% endblock %}
 
 {% block body %}
@@ -41,7 +41,7 @@
 	<div style="padding: 75px;" class="mt-4">
 		<div class="jumbotron">
 			<h1 class="mb-5">
-				Liste des propriétées
+				Liste des paiments
 			</h1>
 
 			{% for message in app.flashes('success') %}
@@ -54,48 +54,28 @@
 				<thead>
 					<tr>
 						<th scope="col">Numéros</th>
-						<th scope="col">Titre</th>
-						<th scope="col">Description</th>
-						<th scope="col">Surface</th>
-						<th scope="col">Pièces</th>
-						<th scope="col">Chambre</th>
-						<th scope="col">Adresse</th>
-						<th scope="col">Complément d'adresse</th>
-						<th scope="col">Ville</th>
-						<th scope="col">Code postal</th>
-						<th scope="col">Prix des charges</th>
-						<th scope="col">Prix du loyer</th>
-						<th scope="col">Prix du dépot de garantie</th>
 						<th scope="col">Locataire</th>
+						<th scope="col">Facture</th>
+						<th scope="col">Montant</th>
 						<th scope="col"></th>
 						<th scope="col"></th>
 					</tr>
 				</thead>
 
 				<tbody>
-					{% for property in propertys|sort %}
+					{% for payment in payments|sort %}
 						<tr class="table-light">
-							<th scope="row">{{ property.id }}</th>
-							<td>{{ property.title }}</td>
-							<td>{{ property.description }}</td>
-							<td>{{ property.surface }}</td>
-							<td>{{ property.rooms }}</td>
-							<td>{{ property.bedrooms }}</td>
-							<td>{{ property.address }}</td>
-							<td>{{ property.additionaladdress }}</td>
-							<td>{{ property.city }}</td>
-							<td>{{ property.postalcode }}</td>
-							<td>{{ property.pricecharges }}</td>
-							<td>{{ property.rentprice }}</td>
-							<td>{{ property.securitydepositprice }}</td>
-							<td>{{ property.tenant }}</td>
+							<th scope="row">{{ payment.id }}</th>
+							<td>{{ payment.tenant }}</td>
+							<td>{{ payment.invoice }}</td>
+							<td>{{ payment.amount }}</td>
 							<td>
-								<a href="{{ path('app_property_edit', {id: property.id}) }}" class="btn btn-warning">
+								<a href="{{ path('app_payment_edit', {id: payment.id}) }}" class="btn btn-warning">
 									Editer
 								</a>
 							</td>
 							<td>
-								<a href="{{ path('app_property_delete', {id: property.id}) }}" class="btn btn-danger">
+								<a href="{{ path('app_payment_delete', {id: payment.id}) }}" class="btn btn-danger">
 									Supprimer
 								</a>
 							</td>
@@ -106,11 +86,11 @@
 			</table>
 
 			<div class="navigation d-flex justify-content-center">
-				{{ knp_pagination_render(propertys) }}
+				{{ knp_pagination_render(payments) }}
 			</div>
 
-			<a href="{{ path('app_property_new') }}" class="btn btn-success mt-4 d-flex justify-content-center">
-				Ajouter une propriétée
+			<a href="{{ path('app_payment_new') }}" class="btn btn-success mt-4 d-flex justify-content-center">
+				Ajouter un paiment
 			</a>
 
 		</div>

@@ -2,6 +2,7 @@
 
 namespace App\DataFixtures;
 
+use App\Entity\Payments;
 use Faker\Factory;
 use App\Entity\User;
 use Faker\Generator;
@@ -9,6 +10,7 @@ use App\Entity\Property;
 use Doctrine\Persistence\ObjectManager;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use App\Entity\Tenant;
+use Faker\Provider\ar_EG\Payment;
 
 class AppFixtures extends Fixture
 {
@@ -54,6 +56,17 @@ class AppFixtures extends Fixture
             $manager->persist($property);
         }
 
+        //Payment
+        $payments = [];
+        for ($m = 0; $m < 20; $m++) {
+            $payment = new Payments();
+            $payment->setInvoice($this->faker->name())
+                ->setAmount(mt_rand(300, 600));
+
+            $payments[] = $payment;
+            $manager->persist($payment);
+        }
+
         // Tenant
         for ($k = 1; $k < 20; $k++) {
             $tenant = new Tenant();
@@ -64,8 +77,8 @@ class AppFixtures extends Fixture
 
             for ($l = 0; $l < 1; $l++) {
                 $tenant->addProperty($properties[mt_rand(0, count($properties) - 1)]);
+                $tenant->addPayment($payments[mt_rand(0, count($payments) - 1)]);
             }
-
 
             $manager->persist($tenant);
         }

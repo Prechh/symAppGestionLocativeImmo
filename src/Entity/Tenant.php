@@ -44,11 +44,15 @@ class Tenant
     #[ORM\OneToMany(mappedBy: 'tenant', targetEntity: Property::class)]
     private Collection $property;
 
+    #[ORM\OneToMany(mappedBy: 'Tenant', targetEntity: Payments::class)]
+    private Collection $payments;
+
     public function __construct()
     {
         $this->property = new ArrayCollection();
         $this->createdAt = new \DateTimeImmutable();
         $this->updatedAt = new \DateTimeImmutable();
+        $this->payments = new ArrayCollection();
     }
 
     #[ORM\PrePersist]
@@ -167,5 +171,35 @@ class Tenant
     public function __toString()
     {
         return $this->name;
+    }
+
+    /**
+     * @return Collection<int, Payments>
+     */
+    public function getPayments(): Collection
+    {
+        return $this->payments;
+    }
+
+    public function addPayment(Payments $payment): self
+    {
+        if (!$this->payments->contains($payment)) {
+            $this->payments->add($payment);
+            $payment->setTenant($this);
+        }
+
+        return $this;
+    }
+
+    public function removePayment(Payments $payment): self
+    {
+        if ($this->payments->removeElement($payment)) {
+            // set the owning side to null (unless already changed)
+            if ($payment->getTenant() === $this) {
+                $payment->setTenant(null);
+            }
+        }
+
+        return $this;
     }
 }
