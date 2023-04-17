@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use DateTimeImmutable;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use App\Repository\PropertyRepository;
@@ -18,12 +20,12 @@ class Property
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column(length: 50)]
+    #[ORM\Column(length: 255)]
     #[Assert\Length(
         min: 5,
-        max: 50,
+        max: 255,
         minMessage: 'Votre titre est trop court. Il doit contenir au minimum 5 caractères',
-        maxMessage: 'Votre titre est trop long. Il doit contenir au maximum 50 caractères',
+        maxMessage: 'Votre titre est trop long. Il doit contenir au maximum 255 caractères',
     )]
     private ?string $Title = null;
 
@@ -51,30 +53,30 @@ class Property
     #[Assert\NotNull()]
     private ?int $Bedrooms = null;
 
-    #[ORM\Column(length: 50)]
+    #[ORM\Column(length: 255)]
     #[Assert\NotNull()]
     #[Assert\Length(
         min: 5,
-        max: 50,
+        max: 255,
         minMessage: 'La valeur de ce champ est trop court. Il doit contenir au minimum 5 caractères',
-        maxMessage: 'La valeur de ce champ est trop long. Il doit contenir au maximum 50 caractères',
+        maxMessage: 'La valeur de ce champ est trop long. Il doit contenir au maximum 255 caractères',
     )]
     private ?string $Address = null;
 
-    #[ORM\Column(length: 50, nullable: true)]
+    #[ORM\Column(length: 255, nullable: true)]
     #[Assert\Length(
-        max: 50,
-        maxMessage: 'La valeur de ce champ est trop long. Il doit contenir au maximum 50 caractères',
+        max: 255,
+        maxMessage: 'La valeur de ce champ est trop long. Il doit contenir au maximum 255 caractères',
     )]
     private ?string $Additional_address = null;
 
-    #[ORM\Column(length: 50)]
+    #[ORM\Column(length: 255)]
     #[Assert\NotNull()]
     #[Assert\Length(
         min: 5,
-        max: 50,
+        max: 255,
         minMessage: 'La valeur de ce champ est trop court. Il doit contenir au minimum 5 caractères',
-        maxMessage: 'La valeur de ce champ est trop long. Il doit contenir au maximum 50 caractères',
+        maxMessage: 'La valeur de ce champ est trop long. Il doit contenir au maximum  255 caractères',
     )]
     private ?string $City = null;
 
@@ -106,7 +108,6 @@ class Property
 
     #[ORM\ManyToOne(inversedBy: 'property')]
     private ?Tenant $tenant = null;
-
 
     /**
      * Constructor

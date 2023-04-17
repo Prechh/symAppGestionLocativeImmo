@@ -19,19 +19,19 @@ class Tenant
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column(length: 50)]
+    #[ORM\Column(length: 255)]
     #[Assert\NotBlank()]
     private ?string $name = null;
 
-    #[ORM\Column(length: 50)]
+    #[ORM\Column(length: 255)]
     #[Assert\NotBlank()]
     private ?string $firstname = null;
 
-    #[ORM\Column(length: 50)]
+    #[ORM\Column(length: 255)]
     #[Assert\NotBlank()]
     private ?string $monthly_rate = null;
 
-    #[ORM\Column(length: 50)]
+    #[ORM\Column(length: 255)]
     #[Assert\NotBlank()]
     private ?string $account_balance = null;
 
@@ -45,14 +45,15 @@ class Tenant
     private Collection $property;
 
     #[ORM\OneToMany(mappedBy: 'Tenant', targetEntity: Payments::class)]
-    private Collection $payments;
+    private Collection $payment;
+
 
     public function __construct()
     {
         $this->property = new ArrayCollection();
         $this->createdAt = new \DateTimeImmutable();
         $this->updatedAt = new \DateTimeImmutable();
-        $this->payments = new ArrayCollection();
+        $this->payment = new ArrayCollection();
     }
 
     #[ORM\PrePersist]
@@ -176,15 +177,15 @@ class Tenant
     /**
      * @return Collection<int, Payments>
      */
-    public function getPayments(): Collection
+    public function getPayment(): Collection
     {
-        return $this->payments;
+        return $this->payment;
     }
 
     public function addPayment(Payments $payment): self
     {
-        if (!$this->payments->contains($payment)) {
-            $this->payments->add($payment);
+        if (!$this->payment->contains($payment)) {
+            $this->payment->add($payment);
             $payment->setTenant($this);
         }
 
@@ -193,7 +194,7 @@ class Tenant
 
     public function removePayment(Payments $payment): self
     {
-        if ($this->payments->removeElement($payment)) {
+        if ($this->payment->removeElement($payment)) {
             // set the owning side to null (unless already changed)
             if ($payment->getTenant() === $this) {
                 $payment->setTenant(null);
@@ -201,5 +202,10 @@ class Tenant
         }
 
         return $this;
+    }
+
+    public function subtractDeposit($Security_deposit_price)
+    {
+        $this->account_balance -= $Security_deposit_price;
     }
 }

@@ -24,5 +24,13 @@ services:
     resource: "../src/EntityListener"
     tags: ["doctrine.orm.entity_listener"]
 
+  App\EntityListener\TenantListener:
+    tags:
+      - { name: doctrine.event_listener, event: postUpdate }
+
+  App\EntityListener\PaymentListener:
+    tags:
+      - { name: doctrine.event_listener, event: postUpdate }
+
   # add more service definitions when explicit configuration is needed
   # please note that last definitions always *replace* previous ones

@@ -14,7 +14,7 @@ class Payments
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\ManyToOne(inversedBy: 'payments')]
+    #[ORM\ManyToOne(inversedBy: 'payment')]
     private ?Tenant $Tenant = null;
 
     #[ORM\Column(length: 255)]
@@ -26,6 +26,9 @@ class Payments
     #[ORM\Column]
     private ?\DateTimeImmutable $createdAt = null;
 
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $Property = null;
+
     /**
      * Constructor
      */
@@ -33,7 +36,6 @@ class Payments
     {
         $this->createdAt = new DateTimeImmutable();
     }
-
 
     public function getId(): ?int
     {
@@ -84,6 +86,18 @@ class Payments
     public function setCreatedAt(\DateTimeImmutable $createdAt): self
     {
         $this->createdAt = $createdAt;
+
+        return $this;
+    }
+
+    public function getProperty(): ?string
+    {
+        return $this->Property;
+    }
+
+    public function setProperty(?string $Property): self
+    {
+        $this->Property = $Property;
 
         return $this;
     }

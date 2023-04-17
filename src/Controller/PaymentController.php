@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Payments;
+use App\Entity\Tenant;
 use App\Form\PaymentType;
 use App\Repository\PaymentsRepository;
 use Doctrine\ORM\EntityManagerInterface;
@@ -28,32 +29,6 @@ class PaymentController extends AbstractController
         ]);
     }
 
-    #[Route('/payment/new', name: 'app_payment_new',  methods: ['GET', 'POST'])]
-    public function new(Request $request, EntityManagerInterface $manager): Response
-    {
-        $payment = new Payments();
-        $form = $this->createForm(PaymentType::class, $payment);
-
-        $form->handleRequest($request);
-        if ($form->isSubmitted() && $form->isValid()) {
-            $payment = $form->getData();
-
-            $manager->persist($payment);
-            $manager->flush();
-
-            $this->addFlash(
-                'success',
-                'Le paiment à été ajoutée avec succès !'
-            );
-
-            return $this->redirectToRoute('app_payment');
-        }
-
-        return $this->render('payment/newPayment.html.twig', [
-            'form' => $form->createView()
-        ]);
-    }
-
     #[Route('/payment/edit/{id}', 'app_payment_edit',  methods: ['GET', 'POST'])]
     public function edit(Payments $payment, Request $request, EntityManagerInterface $manager): Response
     {
@@ -62,6 +37,7 @@ class PaymentController extends AbstractController
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             $payment = $form->getData();
+
 
             $manager->persist($payment);
             $manager->flush();

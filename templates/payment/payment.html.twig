@@ -55,8 +55,10 @@
 					<tr>
 						<th scope="col">Numéros</th>
 						<th scope="col">Locataire</th>
+						<th scope="col">Propriétée</th>
 						<th scope="col">Facture</th>
 						<th scope="col">Montant</th>
+						<th scope="col">Date de l'opération</th>
 						<th scope="col"></th>
 						<th scope="col"></th>
 					</tr>
@@ -67,8 +69,11 @@
 						<tr class="table-light">
 							<th scope="row">{{ payment.id }}</th>
 							<td>{{ payment.tenant }}</td>
+							<td>{{ payment.property }}</td>
 							<td>{{ payment.invoice }}</td>
 							<td>{{ payment.amount }}</td>
+							<td>
+								{{ payment.createdAt|date("d/m/Y") }}</td>
 							<td>
 								<a href="{{ path('app_payment_edit', {id: payment.id}) }}" class="btn btn-warning">
 									Editer
@@ -89,7 +94,7 @@
 				{{ knp_pagination_render(payments) }}
 			</div>
 
-			<a href="{{ path('app_payment_new') }}" class="btn btn-success mt-4 d-flex justify-content-center">
+			<a href="{{ path('app_property') }}" class="btn btn-success mt-4 d-flex justify-content-center">
 				Ajouter un paiment
 			</a>
 

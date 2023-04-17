@@ -34,6 +34,17 @@ class AppFixtures extends Fixture
             $manager->persist($user);
         }
 
+        //Payment
+        $payments = [];
+        for ($m = 0; $m < 20; $m++) {
+            $payment = new Payments();
+            $payment->setInvoice($this->faker->name())
+                ->setAmount(mt_rand(300, 600));
+
+            $payments[] = $payment;
+            $manager->persist($payment);
+        }
+
 
         // Property
         $properties = [];
@@ -52,19 +63,9 @@ class AppFixtures extends Fixture
                 ->setRentPrice(mt_rand(300, 600))
                 ->setSecurityDepositPrice(mt_rand(300, 600));
 
+
             $properties[] = $property;
             $manager->persist($property);
-        }
-
-        //Payment
-        $payments = [];
-        for ($m = 0; $m < 20; $m++) {
-            $payment = new Payments();
-            $payment->setInvoice($this->faker->name())
-                ->setAmount(mt_rand(300, 600));
-
-            $payments[] = $payment;
-            $manager->persist($payment);
         }
 
         // Tenant
