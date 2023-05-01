@@ -6,8 +6,10 @@ use App\Entity\Payments;
 use App\Entity\Tenant;
 use App\Form\PaymentType;
 use App\Repository\PaymentsRepository;
+use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityManagerInterface;
 use Knp\Component\Pager\PaginatorInterface;
+use PDO;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -54,6 +56,29 @@ class PaymentController extends AbstractController
             'form' => $form->createView()
         ]);
     }
+
+    private EntityManagerInterface $entityManager;
+
+    public function __construct(EntityManagerInterface $entityManager)
+    {
+        $this->entityManager = $entityManager;
+    }
+
+    #[Route('/payment/bilancompte/{id}', 'app_payment_bilancompte',  methods: ['GET'])]
+    public function show($id): Response
+
+    {
+
+        $tenant = $this->entityManager->getRepository(Tenant::class)->find($id);
+        $payments = $this->entityManager->getRepository(Payments::class)->findBy(['Tenant' => $tenant]);
+
+
+
+        return $this->render('payment/bilancompte.html.twig', [
+            'payments' => $payments
+        ]);
+    }
+
 
     #[Route('/payment/delete/{id}', 'app_payment_delete',  methods: ['GET'])]
     public function delete(EntityManagerInterface $manager, Payments $payment): Response

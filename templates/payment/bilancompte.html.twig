@@ -1,7 +1,7 @@
 {% extends "base.html.twig" %}
 
 {% block title %}
-	Editer une propriétée
+	Editer un paiment
 {% endblock %}
 
 {% block body %}
@@ -45,37 +45,54 @@
 
 	<div class="container">
 		<h1 class="mt-5">
-			Modifier une propriétée
+			Récapitulatif des paiments
 		</h1>
 
-		{{ form_start(form) }}
-		<div class="row mt-5">
-			<div class="col-md-4">{{ form_row(form.Title)}}</div>
-			<div class="col-md-8">{{ form_row(form.Description)}}</div>
-		</div>
 
-		<div class="row">
-			<div class="col-md-4">{{ form_row(form.Surface)}}</div>
-			<div class="col-md-4">{{ form_row(form.Rooms)}}</div>
-			<div class="col-md-4">{{ form_row(form.Bedrooms)}}</div>
-		</div>
+		<table class="table table-hover">
+			<thead>
+				<tr>
+					<th scope="col">Numéros</th>
+					<th scope="col">Locataire</th>
+					<th scope="col">Propriétée</th>
+					<th scope="col">Facture</th>
+					<th scope="col">Montant</th>
+					<th scope="col">Date de l'opération</th>
+					<th scope="col"></th>
+					<th scope="col"></th>
+				</tr>
+			</thead>
 
-		<div class="row">
-			<div class="col-md-4">{{ form_row(form.Price_charges)}}</div>
-			<div class="col-md-4">{{ form_row(form.Rent_price)}}</div>
-			<div class="col-md-4">{{ form_row(form.Security_deposit_price)}}</div>
-		</div>
+			<tbody>
+				{% for payment in payments|sort %}
+					<tr class="table-light">
+						<th scope="row">{{ payment.id }}</th>
+						<td>{{ payment.tenant }}</td>
+						<td>{{ payment.property }}</td>
+						<td>{{ payment.invoice }}</td>
+						<td>{{ payment.amount }}</td>
+						<td>
+							{{ payment.createdAt|date("d/m/Y") }}</td>
+						<td>
+							<a href="{{ path('app_payment_edit', {id: payment.id}) }}" class="btn btn-warning">
+								Editer
+							</a>
+						</td>
+						<td>
+							<a href="{{ path('app_payment_bilancompte', {id: payment.id}) }}" class="btn btn-primary">
+								Bilan
+							</a>
+						</td>
+						<td>
+							<a href="{{ path('app_payment_delete', {id: payment.id}) }}" class="btn btn-danger">
+								Supprimer
+							</a>
+						</td>
 
-		<div class="row">
-			<div class="col-md-6">{{ form_row(form.Address)}}</div>
-			<div class="col-md-6">{{ form_row(form.Additional_address)}}</div>
-		</div>
+					</tr>
+				{% endfor %}
+			</tbody>
+		</table>
 
-		<div class="row">
-			<div class="col-md-6">{{ form_row(form.City)}}</div>
-			<div class="col-md-6">{{ form_row(form.Postal_code)}}</div>
-		</div>
-		{{ form_end(form) }}
-	</div>
 
-{% endblock %}
+	{% endblock %}

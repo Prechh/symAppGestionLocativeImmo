@@ -2,12 +2,15 @@
 
 namespace App\Controller;
 
+use Knp\Snappy\Pdf;
 use App\Entity\Tenant;
+use App\Entity\Payments;
 use App\Form\TenantType;
 use App\Repository\TenantRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Knp\Component\Pager\PaginatorInterface;
 use Doctrine\ORM\Tools\Pagination\Paginator;
+use PHPUnit\Framework\Test;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -94,4 +97,27 @@ class TenantController extends AbstractController
 
         return $this->redirectToRoute('app_tenant');
     }
+
+
+
+    /*  #[Route('/pdf/{id}', name: 'bilancompte.pdf')]
+    public function generatePdf(Pdf $pdf, Tenant $tenant, Payments $payments)
+    {
+
+        $html = $this->renderView('tenant/BilanCompteTemplate.html.twig', [
+            '$tenant' => $tenant,
+            "title" => "BilanCompte {$tenant->getId()}",
+        ]);
+
+        $filename =  "BilanCompte {$tenant->getId()}";
+
+        return new Response(
+            $pdf->getOutputFromHtml($html),
+            200,
+            [
+                'Content-Type' => 'application/pdf',
+                'Content-Disposition' => 'attachment; filename="' . $filename . '".pdf"'
+            ]
+        );
+    }*/
 }

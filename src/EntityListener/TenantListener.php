@@ -17,8 +17,6 @@ class TenantListener
       $tenant = $entity->getTenant();
       $deposit = $entity->getSecurityDepositPrice();
 
-      $tenant->subtractDeposit($deposit);
-
       $entityManager = $args->getObjectManager();
       $entityManager->persist($tenant);
       $entityManager->flush();

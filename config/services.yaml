@@ -32,5 +32,13 @@ services:
     tags:
       - { name: doctrine.event_listener, event: postUpdate }
 
+  App\Command\RentDeductCommand:
+    tags:
+      - { name: console.command }
+      - { name: doctrine.orm.entity_manager }
+    arguments:
+      $container: "@service_container"
+      $entityManager: "@doctrine.orm.entity_manager"
+
   # add more service definitions when explicit configuration is needed
   # please note that last definitions always *replace* previous ones

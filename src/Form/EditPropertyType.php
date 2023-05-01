@@ -7,7 +7,6 @@ use App\Entity\Tenant;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use App\Repository\TenantRepository;
 use Symfony\Component\Form\AbstractType;
-
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -16,9 +15,8 @@ use Symfony\Component\Form\Extension\Core\Type\MoneyType;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
-use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 
-class PropertyType extends AbstractType
+class EditPropertyType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
@@ -197,32 +195,12 @@ class PropertyType extends AbstractType
                 ]
             ])
 
-            ->add('manage_by_agency', ChoiceType::class, [
-                'choices' => [
-                    'Oui' => 0,
-                    'Non' => 1,
-                ],
-                'attr' => [
-                    'class' => 'form-control',
-                ],
-                'label' => 'Gérer par l\'agence :',
-                'label_attr' => [
-                    'class' => 'form-label mt-4'
-                ],
-                'constraints' => [
-                    new Assert\NotBlank(),
-                ]
-            ])
-
-
-            ->add('tenant')
-
 
             ->add('Submit', SubmitType::class, [
                 'attr' => [
                     "class" => 'btn btn-success mt-5',
                 ],
-                'label' => 'Ajouter la propriétée',
+                'label' => 'Modifier la propriétée',
 
             ]);
     }

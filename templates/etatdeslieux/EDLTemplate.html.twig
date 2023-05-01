@@ -1,0 +1,151 @@
+{% extends 'base.html.twig' %}
+
+
+{% block title %}
+	Accueil
+{% endblock %}
+
+
+{% block body %}
+
+	<h1>
+		Etat des lieux numéros
+		{{ etatdeslieux.id }}
+	</h1>
+
+	<p>
+		Entrée réalisé le
+		{{ etatdeslieux.dateEnter }}
+
+		Sortie réalisé le
+		{{ etatdeslieux.dateExit }}
+	</p>
+	<br/><br/><br/><br/>
+
+
+	<h2>
+		Les locaux
+	</h2>
+
+	<p>
+		Type :
+		{{ etatdeslieux.propertyType}}
+		<br/>
+
+		Surface :
+		{{ etatdeslieux.surface}}
+		<br/>
+
+		Nombre de pièces princiaples :
+		{{ etatdeslieux.numberMainRooms}}
+		<br/>
+
+		Nombre de pièces princiaples :
+		{{ etatdeslieux.fullAdress}}
+		<br/><br/><br/><br/>
+	</p>
+
+	<h2>
+		Le Bailleur
+	</h2>
+
+	<p>
+		Nom et prénom  :
+		{{ etatdeslieux.fullnameLessor}}
+		<br/>
+
+		Adresse  :
+		{{ etatdeslieux.fullAdressLessor}}
+		<br/><br/><br/><br/>
+	</p>
+
+	<h2>
+		Le Locataire
+	</h2>
+
+	<p>
+		Nom et prénom  :
+		{{ etatdeslieux.fullnameTenant}}
+		<br/>
+
+		Adresse  :
+		{{ etatdeslieux.fullAdressTenant}}
+		<br/><br/><br/><br/>
+	</p>
+
+
+	<h2>
+		Relevé de compteur
+	</h2>
+
+	<p>
+		Numéros compteur Elec :
+		{{ etatdeslieux.numberCounterElec}}
+		<br/>
+
+		Numéros compteur Gaz  :
+		{{ etatdeslieux.numberCounterGaz}}
+		<br/>
+
+		Eau chaude :
+		{{ etatdeslieux.cubicMeterColdWater}}
+		<br/>
+
+		Eau froide :
+		{{ etatdeslieux.cubicMeterHotWater }}
+		<br/>
+
+		Ancien occupant :
+		{{ etatdeslieux.nameFormerTenant}}
+		<br/><br/><br/><br/>
+	</p>
+
+
+	<h2>
+		Equipement Energitique :
+	</h2>
+
+	<p>
+		Type de chauffage  :
+		{{ etatdeslieux.heatingType }}
+		<br/>
+
+		Eau chaude :
+		{{ etatdeslieux.hotWaterType}}
+		<br/>
+
+		Eau chaude :
+		{{ etatdeslieux.cubicMeterColdWater}}
+		<br/><br/><br/><br/>
+	</p>
+
+
+	<h2>
+		Equipement de chauffage :
+	</h2>
+
+	<p>
+		Chaudière / état  :
+		{{ etatdeslieux.stateBoiler }}
+		<br/>
+
+		Nombre de radiateur à eau :
+		{{ etatdeslieux.numberWaterRadiator}}
+		<br/>
+
+		Nombre de radiateur électrique :
+		{{ etatdeslieux.numberElecRadiator}}
+		<br/><br/><br/><br/>
+	</p>
+
+	<h2>
+		Observation :
+	</h2>
+
+	<p>
+		{{ etatdeslieux.observation }}
+		<br/>
+	</p>
+
+
+{% endblock %}

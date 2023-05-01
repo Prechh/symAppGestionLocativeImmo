@@ -12,9 +12,16 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Validator\Constraints as Assert;
 
 
+#[ORM\HasLifecycleCallbacks]
 #[ORM\Entity(repositoryClass: PropertyRepository::class)]
 class Property
 {
+    const MANAGE = [
+        "" => '',
+        0 => 'Oui',
+        1 => 'Non',
+    ];
+
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
@@ -108,6 +115,15 @@ class Property
 
     #[ORM\ManyToOne(inversedBy: 'property')]
     private ?Tenant $tenant = null;
+
+    #[ORM\Column(nullable: true)]
+    private ?float $totalPrice = null;
+
+    #[ORM\Column(nullable: true)]
+    private ?float $DepositLoyer = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $manageByAgency = null;
 
     /**
      * Constructor
@@ -302,5 +318,59 @@ class Property
         $this->tenant = $tenant;
 
         return $this;
+    }
+
+    public function getTotalPrice(): ?float
+    {
+        return $this->totalPrice;
+    }
+
+    public function setTotalPrice(?float $totalPrice): self
+    {
+        $this->totalPrice = $totalPrice;
+
+        return $this;
+    }
+
+    #[ORM\PrePersist()]
+    #[ORM\PreUpdate()]
+    public function updateTotalPrice()
+    {
+        $this->totalPrice = $this->Price_charges + $this->Rent_price;
+    }
+
+    public function getDepositLoyer(): ?float
+    {
+        return $this->DepositLoyer;
+    }
+
+    public function setDepositLoyer(?float $DepositLoyer): self
+    {
+        $this->DepositLoyer = $DepositLoyer;
+
+        return $this;
+    }
+
+
+    public function __toString()
+    {
+        return $this->getTitle();
+    }
+
+    public function getManageByAgency(): ?string
+    {
+        return $this->manageByAgency;
+    }
+
+    public function setManageByAgency(?string $manageByAgency): self
+    {
+        $this->manageByAgency = $manageByAgency;
+
+        return $this;
+    }
+
+    public function getManageType(): ?string
+    {
+        return self::MANAGE[$this->manageByAgency];
     }
 }

@@ -1,0 +1,74 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+	Nouvel état des lieux
+{% endblock %}
+
+
+{% block body %}
+
+	<div class="container">
+		<h1 class="mt-4">
+			Créer un état des lieux
+		</h1>
+
+
+		{{ form_start(form) }}
+		<div class="row">
+			<div class="col-md-6">{{ form_row(form.dateEnter)}}</div>
+			<div class="col-md-6">{{ form_row(form.dateExit, {'required': false} )}}</div>
+		</div>
+
+		<div class="row">
+			<div class="col-md-4">{{ form_row(form.propertyType)}}</div>
+			<div class="col-md-4">{{ form_row(form.surface)}}</div>
+			<div class="col-md-4">{{ form_row(form.numberMainRooms)}}</div>
+		</div>
+
+		<div class="row">
+			<div class="col-md-12">{{ form_row(form.fullAdress)}}</div>
+		</div>
+
+		<div class="row">
+			<div class="col-md-6">{{ form_row(form.fullnameLessor)}}</div>
+			<div class="col-md-6">{{ form_row(form.fullAdressLessor)}}</div>
+		</div>
+
+		<div class="row">
+			<div class="col-md-6">{{ form_row(form.fullnameTenant)}}</div>
+			<div class="col-md-6">{{ form_row(form.fullAdressTenant)}}</div>
+		</div>
+
+		<div class="row">
+			<div class="col-md-6">{{ form_row(form.numberCounterElec)}}</div>
+			<div class="col-md-6">{{ form_row(form.numberCounterGaz)}}</div>
+		</div>
+
+		<div class="row">
+			<div class="col-md-6">{{ form_row(form.cubicMeterColdWater)}}</div>
+			<div class="col-md-6">{{ form_row(form.cubicMeterHotWater)}}</div>
+		</div>
+
+		<div class="row">
+			<div class="col-md-12">{{ form_row(form.nameFormerTenant)}}</div>
+		</div>
+
+		<div class="row">
+			<div class="col-md-6">{{ form_row(form.heatingType)}}</div>
+			<div class="col-md-6">{{ form_row(form.hotWaterType)}}</div>
+		</div>
+
+		<div class="row">
+			<div class="col-md-4">{{ form_row(form.stateBoiler)}}</div>
+			<div class="col-md-4">{{ form_row(form.numberElecRadiator)}}</div>
+			<div class="col-md-4">{{ form_row(form.numberWaterRadiator)}}</div>
+		</div>
+
+		<div class="row">
+			<div class="col-md-12">{{ form_row(form.observation)}}</div>
+		</div>
+
+		{{ form_end(form) }}
+
+	</div>
+{% endblock %}

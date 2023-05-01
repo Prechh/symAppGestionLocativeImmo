@@ -1,0 +1,128 @@
+{% extends 'base.html.twig' %}
+
+
+{% block title %}
+	Accueil
+{% endblock %}
+
+
+{% block body %}
+	<nav class="navbar navbar-expand-lg navbar-light bg-success">
+		<div class="container-fluid">
+			<a class="navbar-brand" href="{{ path('app_home') }}">AgenceImmobillièreFictive</a>
+			<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor03" aria-controls="navbarColor03" aria-expanded="false" aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+			<div class="collapse navbar-collapse" id="navbarColor03">
+				<ul class="navbar-nav me-auto">
+					<li class="nav-item">
+						<a class="nav-link active" href="{{ path('app_property') }}">Propriétées
+							<span class="visually-hidden">(current)</span>
+						</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link active" href="{{ path('app_tenant') }}">Locataires
+							<span class="visually-hidden">(current)</span>
+						</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link active" href="{{ path('app_payment') }}">Paiements
+							<span class="visually-hidden">(current)</span>
+						</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link active" href="{{ path('app_etat_des_lieux') }}">Etat des lieux
+							<span class="visually-hidden">(current)</span>
+						</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link active" href="{{ path('app_login_logout') }}">Se déconnecter
+							<span class="visually-hidden">(current)</span>
+						</a>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</nav>
+
+	<div class="container">
+		{% for message in app.flashes('success') %}
+			<div style="margin-top: 25px" class="alert alert-success">
+				{{ message }}
+			</div>
+		{% endfor %}
+	</div>
+
+	<table class="table table-hover">
+		<thead>
+			<tr>
+				<th scope="col">Numéros</th>
+				<th scope="col">Date entrée</th>
+				<th scope="col">Date sortie</th>
+				<th scope="col">Titre Propriétée</th>
+				<th scope="col">Type de Propriétée</th>
+				<th scope="col">Surface propriétée</th>
+				<th scope="col">Nombre de pièces principales</th>
+				<th scope="col">Adresse complète</th>
+				<th scope="col">Nom complet Bailleur</th>
+				<th scope="col">Adresse complète Bailleur</th>
+				<th scope="col">Nom complet Locataire</th>
+				<th scope="col">Adresse complète Locataire</th>
+				<th scope="col">Nom ancien locataire</th>
+				<th scope="col">Observation</th>
+				<th scope="col"></th>
+				<th scope="col"></th>
+				<th scope="col"></th>
+			</tr>
+		</thead>
+
+
+		<tbody>
+			{% for etatdeslieux in etatdeslieuxs %}
+
+				<tr class="table-light">
+					<th scope="row">{{ etatdeslieux.id }}</th>
+					<td>{{ etatdeslieux.dateEnter}}</td>
+					<td>{{ etatdeslieux.dateExit }}</td>
+					<td>{{ etatdeslieux.property }}</td>
+					<td>{{ etatdeslieux.propertyType }}</td>
+					<td>{{ etatdeslieux.surface }}</td>
+					<td>{{ etatdeslieux.numberMainRooms }}</td>
+					<td>{{ etatdeslieux.fullAdress }}</td>
+					<td>{{ etatdeslieux.fullnameLessor }}</td>
+					<td>{{ etatdeslieux.fullAdressLessor }}</td>
+					<td>{{ etatdeslieux.tenant }}</td>
+					<td>{{ etatdeslieux.fullAdressTenant }}</td>>
+					<td>{{ etatdeslieux.nameFormerTenant }}</td>
+					<td>{{ etatdeslieux.observation }}</td>
+					<td>
+						<a href="{{ path('app_etat_des_lieux_edit', {id: etatdeslieux.id}) }}" class="btn btn-warning">
+							Editer
+						</a>
+					</td>
+					<td>
+						<a href="{{ path('etatdeslieux.pdf', {id: etatdeslieux.id}) }}" class="btn btn-primary">
+							PDF
+						</a>
+					</td>
+					<td>
+						<a href="{{ path('app_etat_des_lieux_delete', {id: etatdeslieux.id}) }}" class="btn btn-danger">
+							Supprimer
+						</a>
+					</td>
+
+
+				</tr>
+			{% endfor %}
+		</tbody>
+		<table>
+
+			<div class="navigation d-flex justify-content-center">
+				{{ knp_pagination_render(etatdeslieuxs) }}
+			</div>
+
+
+		</div>
+
+
+	{% endblock %}

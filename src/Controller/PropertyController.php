@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Property;
 use App\Form\PropertyType;
+use App\Form\EditPropertyType;
 use App\Repository\PropertyRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Knp\Component\Pager\PaginatorInterface;
@@ -45,7 +46,6 @@ class PropertyController extends AbstractController
                 'success',
                 'La propriétée à été ajoutée avec succès !'
             );
-
             return $this->redirectToRoute('app_property');
         }
 
@@ -62,17 +62,31 @@ class PropertyController extends AbstractController
 
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
+
             $property = $form->getData();
+            if ($form['tenant']->getData()) {
 
-            $manager->persist($property);
-            $manager->flush();
+                $manager->persist($property);
+                $manager->flush();
 
-            $this->addFlash(
-                'success',
-                'La propriétée à été modifié avec succès !'
-            );
+                $this->addFlash(
+                    'success',
+                    'La propriétée à été ajoutée avec succès !'
+                );
 
-            return $this->redirectToRoute('app_property');
+                return $this->redirectToRoute('app_etat_des_lieux_new');
+            } elseif (empty($form['tenant']->getData())) {
+
+                $manager->persist($property);
+                $manager->flush();
+
+                $this->addFlash(
+                    'success',
+                    'La propriétée à été ajoutée avec succès !'
+                );
+
+                return $this->redirectToRoute('app_property');
+            }
         }
 
         return $this->render('property/editProperty.html.twig', [
