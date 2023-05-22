@@ -63,7 +63,7 @@ class TenantType extends AbstractType
                 'attr' => [
                     'class' => 'form-control',
                 ],
-                'label' => 'Type de paiment  :',
+                'label' => 'Type de paiement  :',
                 'label_attr' => [
                     'class' => 'form-label mt-4'
                 ],

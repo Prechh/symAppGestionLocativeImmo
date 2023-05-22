@@ -46,21 +46,15 @@
 	<div style="padding: 75px;" class="mt-4">
 		<div class="jumbotron">
 			<h1 class="mb-5">
-				Liste des paiments
+				Liste des paiements
 			</h1>
-
-			{% for message in app.flashes('success') %}
-				<div class="alert alert-success mt-4">
-					{{ message }}
-				</div>
-			{% endfor %}
 
 			<table class="table table-hover">
 				<thead>
 					<tr>
 						<th scope="col">Numéros</th>
 						<th scope="col">Locataire</th>
-						<th scope="col">Propriétée</th>
+						<th scope="col">Propriété</th>
 						<th scope="col">Facture</th>
 						<th scope="col">Montant</th>
 						<th scope="col">Date de l'opération</th>

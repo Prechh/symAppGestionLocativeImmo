@@ -61,9 +61,8 @@
 						<th scope="col">Numéros</th>
 						<th scope="col">Nom</th>
 						<th scope="col">Prénom</th>
-						<th scope="col">Type de paiment</th>
+						<th scope="col">Type de paiement</th>
 						<th scope="col">Solde du compte</th>
-						<th scope="col"></th>
 						<th scope="col"></th>
 					</tr>
 				</thead>
@@ -81,12 +80,6 @@
 									Editer
 								</a>
 							</td>
-							<td>
-								<a href="{{ path('app_tenant_delete', {id: tenant.id}) }}" class="btn btn-danger">
-									Supprimer
-								</a>
-							</td>
-
 						</tr>
 					{% endfor %}
 				</tbody>

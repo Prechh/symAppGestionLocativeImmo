@@ -16,7 +16,7 @@
 			<div class="collapse navbar-collapse" id="navbarColor03">
 				<ul class="navbar-nav me-auto">
 					<li class="nav-item">
-						<a class="nav-link active" href="{{ path('app_property') }}">Propriétées
+						<a class="nav-link active" href="{{ path('app_property') }}">Propriétés
 							<span class="visually-hidden">(current)</span>
 						</a>
 					</li>
@@ -31,7 +31,7 @@
 						</a>
 					</li>
 					<li class="nav-item">
-						<a class="nav-link active" href="{{ path('app_etat_des_lieux') }}">Etat des lieux
+						<a class="nav-link active" href="{{ path('app_etat_des_lieux') }}">Etats des lieux
 							<span class="visually-hidden">(current)</span>
 						</a>
 					</li>
@@ -53,13 +53,19 @@
 		</div>
 
 		<a href="{{ path('app_property') }}" class="btn btn-success">
-			Voir les propriétée
+			Voir les propriétés
 		</a>
 		<a href="{{ path('app_tenant') }}" class="btn btn-success">
-			Voir les locataire
+			Voir les locataires
 		</a>
 		<a href="{{ path('app_payment') }}" class="btn btn-success">
 			Voir les paiements
+		</a>
+		<a href="{{ path('app_etat_des_lieux') }}" class="btn btn-success">
+			Voir les états des lieux
+		</a>
+		<a href="{{ path('app_login_logout') }}" class="btn btn-success">
+			Se déconnecter
 		</a>
 	</div>
 

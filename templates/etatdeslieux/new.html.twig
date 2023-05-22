@@ -26,7 +26,8 @@
 		</div>
 
 		<div class="row">
-			<div class="col-md-12">{{ form_row(form.fullAdress)}}</div>
+			<div class="col-md-6">{{ form_row(form.propertyName)}}</div>
+			<div class="col-md-6">{{ form_row(form.fullAdress)}}</div>
 		</div>
 
 		<div class="row">
@@ -40,8 +41,8 @@
 		</div>
 
 		<div class="row">
-			<div class="col-md-6">{{ form_row(form.numberCounterElec)}}</div>
-			<div class="col-md-6">{{ form_row(form.numberCounterGaz)}}</div>
+			<div class="col-md-6">{{ form_row(form.numberCounterElec, {'required': false})}}</div>
+			<div class="col-md-6">{{ form_row(form.numberCounterGaz, {'required': false})}}</div>
 		</div>
 
 		<div class="row">

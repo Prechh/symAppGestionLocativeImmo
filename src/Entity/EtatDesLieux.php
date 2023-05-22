@@ -33,17 +33,9 @@ class EtatDesLieux
     private ?int $id = null;
 
     #[ORM\Column(length: 10, nullable: true)]
-    #[Assert\Length(
-        exactly: 6,
-        exactMessage: 'La référence du film entrée n\'est pas conforme. Elle doit contenir exactement 6 caractères',
-    )]
     private ?string $dateEnter = null;
 
     #[ORM\Column(length: 10, nullable: true)]
-    #[Assert\Length(
-        exactly: 6,
-        exactMessage: 'La référence du film entrée n\'est pas conforme. Elle doit contenir exactement 6 caractères',
-    )]
     private ?string $dateExit = null;
 
     #[ORM\Column(length: 255, nullable: true)]
@@ -160,8 +152,11 @@ class EtatDesLieux
     #[ORM\ManyToOne(inversedBy: 'etatDesLieux')]
     private ?Tenant $Tenant = null;
 
-    #[ORM\OneToOne(cascade: ['persist'])]
+    #[ORM\OneToOne(cascade: ['remove'])]
     private ?Property $Property = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $propertyName = null;
 
 
     public function __construct()
@@ -486,6 +481,18 @@ class EtatDesLieux
     public function setProperty(?Property $Property): self
     {
         $this->Property = $Property;
+
+        return $this;
+    }
+
+    public function getPropertyName(): ?string
+    {
+        return $this->propertyName;
+    }
+
+    public function setPropertyName(?string $propertyName): self
+    {
+        $this->propertyName = $propertyName;
 
         return $this;
     }

@@ -116,6 +116,8 @@ class Property
     #[ORM\ManyToOne(inversedBy: 'property')]
     private ?Tenant $tenant = null;
 
+
+
     #[ORM\Column(nullable: true)]
     private ?float $totalPrice = null;
 
@@ -319,6 +321,7 @@ class Property
 
         return $this;
     }
+
 
     public function getTotalPrice(): ?float
     {

@@ -222,7 +222,7 @@ class PropertyType extends AbstractType
                 'attr' => [
                     "class" => 'btn btn-success mt-5',
                 ],
-                'label' => 'Ajouter la propriétée',
+                'label' => 'Ajouter la propriété',
 
             ]);
     }

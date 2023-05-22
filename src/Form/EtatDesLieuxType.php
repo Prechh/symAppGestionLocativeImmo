@@ -72,6 +72,19 @@ class EtatDesLieuxType extends AbstractType
                 ]
             ])
 
+            ->add('propertyName', TextType::class, [
+                'attr' => [
+                    'class' => 'form-control',
+                ],
+                'label' => 'Nom de la propriété :',
+                'label_attr' => [
+                    'class' => 'form-label mt-4'
+                ],
+                'constraints' => [
+                    new Assert\NotBlank(),
+                ]
+            ])
+
             ->add('numberMainRooms', NumberType::class, [
                 'attr' => [
                     'class' => 'form-control',
@@ -301,9 +314,6 @@ class EtatDesLieuxType extends AbstractType
                     new Assert\NotBlank(),
                 ]
             ])
-
-            ->add('Tenant')
-            ->add('Property')
 
 
             ->add('Submit', SubmitType::class, [
